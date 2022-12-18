@@ -7,6 +7,7 @@ import gameService from '../Services/game.service'
 import TokenService from '../Services/token.service'
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
+import RefreshButton from '../Common/RefreshButton'
 
 const Dashboard = () => {
   const history = useHistory()
@@ -18,18 +19,18 @@ const Dashboard = () => {
     setUser(TokenService.getUser())
   },[])
   
-  useEffect(()=>{
-    const fetchGames = async () => {
-      setLoading(true)
-      try {
-        console.log(user)
-        const allGames = await gameService.fetchGames(user._id)
-        setGames(allGames)
-      } catch(error) {
-        console.log(error.response?.data)
-      }
-      setLoading(false)
+  const fetchGames = async () => {
+    setLoading(true)
+    try {
+      const allGames = await gameService.fetchGames(user._id)
+      setGames(allGames)
+    } catch(error) {
+      console.log(error.response?.data)
     }
+    setLoading(false)
+  }
+
+  useEffect(()=>{
     fetchGames()
   },[user])
 
@@ -41,12 +42,13 @@ const Dashboard = () => {
     <div className='relative p-5 h-full overflow-hidden overflow-y-scroll scrollbar-hide'>
       <div className='flex flex-row justify-between align-middle my-2'>
         <p className='font-bold text-3xl'>Your Games</p>
-        <button className='font-bold text-lg' onClick={()=>{
+        <button className='font-bold text-lg mr-10' onClick={()=>{
           TokenService.removeUser()
           history.push('/')
         }}>
           <FontAwesomeIcon icon={faArrowRightFromBracket} /> Logout
         </button>
+        <RefreshButton onRefresh={fetchGames} />
       </div>
       {
         isLoading ?
