@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import BackButton from '../Common/BackButton'
 import Button from '../Common/Button'
 import { fontColor } from '../Common/Config'
-import UserContext from '../Context/UserContext'
 import UserService from '../Services/auth.service'
 
 const Register = () => {
@@ -24,8 +23,8 @@ const Register = () => {
             alert('User Created Successfully')
             history.push('/login')
         } catch (error) {
-            console.log(error.response.data)
-            alert(error.response.data.message)
+            console.log(error?.response?.data)
+            alert(error.response?.data?.message)
         }
     }
 

@@ -1,9 +1,8 @@
-import React, { useContext, useEffect, useRef, useState } from 'react'
+import React, { useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import BackButton from '../Common/BackButton'
 import Button from '../Common/Button'
 import { fontColor } from '../Common/Config'
-import UserContext from '../Context/UserContext'
 import UserService from '../Services/auth.service'
 
 const Login = () => {
@@ -16,12 +15,11 @@ const Login = () => {
 
     const history = useHistory()
     const submitRef = useRef()
-    const { setUser } = useContext(UserContext)
 
     const onLogin = async () => {
         try{
             const userData = await UserService.login(data)
-            setUser(userData)
+            console.log(userData)
             alert('User LoggedIn Successfully')
             history.push('/dashboard')
         } catch (error) {

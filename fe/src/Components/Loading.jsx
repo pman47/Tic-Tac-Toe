@@ -1,9 +1,6 @@
-import React, { useContext } from 'react'
-import UserContext from '../Context/UserContext'
+import React from 'react'
 
 const Loading = () => {
-    const user = useContext(UserContext)
-    console.log(user)
   return (
     <div className='font-Bilbo flex items-center justify-center h-screen'>
         <div className='flex items-center flex-col animate-bounce'>

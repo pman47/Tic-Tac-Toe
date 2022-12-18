@@ -1,16 +1,20 @@
-import React, { useContext, useEffect, useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import Button from '../Common/Button'
 import { fontColor } from '../Common/Config'
 import Games from '../Common/Games'
-import UserContext from '../Context/UserContext'
 import gameService from '../Services/game.service'
+import TokenService from '../Services/token.service'
 
 const Dashboard = () => {
   const history = useHistory()
-  const { user } = useContext(UserContext)
+  const [user,setUser] = useState()
   const [games,setGames] = useState([]);
   const [isLoading, setLoading] = useState(false);
+
+  useEffect(()=>{
+    setUser(TokenService.getUser())
+  },[])
   
   useEffect(()=>{
     const fetchGames = async () => {
@@ -20,20 +24,19 @@ const Dashboard = () => {
         const allGames = await gameService.fetchGames(user._id)
         setGames(allGames)
       } catch(error) {
-        console.log(error.response.data)
+        console.log(error.response?.data)
       }
       setLoading(false)
     }
     fetchGames()
-  },[])
+  },[user])
 
   const createNewGame = () => {
     history.push('/newGame')
   }
 
-  console.log(games)
   return (
-    <div className='p-5 h-full overflow-hidden overflow-y-scroll scrollbar-hide'>
+    <div className='relative p-5 h-full overflow-hidden overflow-y-scroll scrollbar-hide'>
       <p className='font-bold text-3xl my-2'>Your Games</p>
       {
         isLoading ?
@@ -41,9 +44,23 @@ const Dashboard = () => {
         : games.length === 0 ?
           <NoGameFound onPress={createNewGame} />
         : (
+          <>
           <Games games={games} user={user} />
+          <Games games={games} user={user} />
+          <Games games={games} user={user} />
+          <Games games={games} user={user} />
+          <Games games={games} user={user} />
+          </>
         )
       }
+      {!isLoading && games.length > 0 && (
+        <div className='fixed bottom-5'>
+          <button className='ml-2 h-14 drop-shadow-xl rounded-lg text-white font-bold bg-[#270F36] px-5'
+          onClick={createNewGame}>
+            + New Game
+          </button>
+        </div>
+      )}
     </div>
   )
 }
