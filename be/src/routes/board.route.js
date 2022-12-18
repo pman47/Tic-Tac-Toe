@@ -6,7 +6,6 @@ const router = express.Router()
 
 router.post('/updateMove', async(req,res)=>{
     const body = req.body
-    console.log('BODYY', body)
     try {
 
         let board = await Board.findById(body.boardId)
