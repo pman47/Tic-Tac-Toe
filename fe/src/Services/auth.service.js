@@ -23,6 +23,12 @@ const UserService = {
       return response.data;
     });
   },
+
+  async getUsersByEmail(email) {
+    return api.get(`/user/getUsersByEmail?email=${email}`).then((response) => {
+      return response.data
+    });
+  }
 };
 
 export default UserService;

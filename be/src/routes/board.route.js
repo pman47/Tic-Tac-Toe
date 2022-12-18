@@ -65,6 +65,7 @@ router.get('/boards', async(req,res)=>{
 
 router.post('/new', async (req,res)=>{
     const body = req.body
+    console.log('REQQ', req.body)
     try{
         const query = {
             $and: [
@@ -85,9 +86,9 @@ router.post('/new', async (req,res)=>{
         }
 
         body.turn = 1
-        await Board.create(body)
+        const board = await Board.create(body)
 
-        res.status(200).json({ message: 'Board Created Successfully' })
+        res.status(200).json(board)
     }catch(error){
         console.log(error)
         res.status(400).json({ message: 'Something went wrong.' })

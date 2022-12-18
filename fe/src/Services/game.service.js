@@ -8,8 +8,9 @@ const gameService = {
     });
   },
 
-  register(data) {
-    return api.post("/user/register", data).then((response) => {
+  async newGame(data) {
+    console.log('DATA', data)
+    return api.post("/board/new", data).then((response) => {
       return response.data;
     });
   },

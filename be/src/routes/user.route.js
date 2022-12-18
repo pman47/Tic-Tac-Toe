@@ -17,15 +17,15 @@ router.post('/login', async (req,res)=>{
     }
 })
 
-router.get('/get-users', async (req,res)=>{
-    const email = req.body.email
+router.get('/getUsersByEmail', async (req,res)=>{
+    const email = req.query.email
     try{
-        const userData = await User.find({ email : {$regex: email, $options: 'i'}}).limit(5)
-        if(userData.length === 0){
-            res.status(400).json({message: 'Users Not Found'})
+        const usersData = await User.find({ email : {$regex: email, $options: 'i'}}).limit(5)
+        if(usersData.length === 0){
+            res.status(400).json({ message: 'Users Not Found' })
             return
         }
-        res.status(200).json(userData)
+        res.status(200).json(usersData)
     }catch(error){
         console.log(error)
         res.status(400).json(error)

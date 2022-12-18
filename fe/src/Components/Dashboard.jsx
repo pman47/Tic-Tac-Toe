@@ -45,11 +45,7 @@ const Dashboard = () => {
           <NoGameFound onPress={createNewGame} />
         : (
           <>
-          <Games games={games} user={user} />
-          <Games games={games} user={user} />
-          <Games games={games} user={user} />
-          <Games games={games} user={user} />
-          <Games games={games} user={user} />
+            <Games games={games} user={user} />
           </>
         )
       }
