@@ -33,12 +33,16 @@ router.get('/get-users', async (req,res)=>{
 })
 
 
-router.post('/new', async (req,res)=>{
+router.post('/register', async (req,res)=>{
+    console.log(req)
+    console.log(req?.url)
+    console.log(req.body)
     const body = req.body
     try{
-        const existingUser = await User.findOne({email: body.email})
+        const existingUser = await User.findOne({$or : [ { email: body.email }, { username: body.username }]} )
         if(!!existingUser){
-            res.status(400).json({message: 'User already exist'})
+            const message = existingUser.email === body.email ? "User already exist with the same email Id" : "User already exist with the same Username";
+            res.status(400).json({ message })
             return 
         }
         await User.create(body)
