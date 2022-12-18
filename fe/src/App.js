@@ -7,6 +7,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import UserContext from "./Context/UserContext";
 import Home from "./Home";
+import NewGame from "./Components/NewGame";
 
 function App() {
   const [user,setUser] = useState({})
@@ -22,6 +23,7 @@ function App() {
                 <Route path='/login' component={Login} />
                 <Route path='/register' component={Register} />
                 <Route path='/dashboard' component={Dashboard} />
+                <Route path='/newGame' component={NewGame} />
               </Switch>
             </BrowserRouter>
         </div>

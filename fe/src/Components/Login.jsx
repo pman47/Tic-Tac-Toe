@@ -16,11 +16,12 @@ const Login = () => {
 
     const history = useHistory()
     const submitRef = useRef()
-    // const user = useContext(UserContext)
+    const { setUser } = useContext(UserContext)
 
     const onLogin = async () => {
         try{
-            await UserService.login(data)
+            const userData = await UserService.login(data)
+            setUser(userData)
             alert('User LoggedIn Successfully')
             history.push('/dashboard')
         } catch (error) {

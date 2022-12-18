@@ -44,14 +44,18 @@ router.post('/updateMove', async(req,res)=>{
 })
 
 router.get('/boards', async(req,res)=>{
-    const body = req.body
+    const userId = req.query?.userId
+    if(userId === undefined){
+        res.status(400).json({ message: "Undefined Id passed" })
+        return
+    }
     try {
         const allBoards = await Board.find({
             $or: [
-                { creator : Object(body.id) },
-                { player : Object(body.id) }
+                { creator : Object(userId) },
+                { player : Object(userId) }
             ]
-        })
+        }).sort({ updatedAt : 1 }).populate('creator').populate('player')
         res.status(200).json(allBoards)
     } catch(error) {
         console.log(error)
