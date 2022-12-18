@@ -65,7 +65,6 @@ router.get('/boards', async(req,res)=>{
 
 router.post('/new', async (req,res)=>{
     const body = req.body
-    console.log('REQQ', req.body)
     try{
         const query = {
             $and: [

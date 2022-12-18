@@ -4,6 +4,7 @@ import BackButton from '../Common/BackButton'
 import Button from '../Common/Button'
 import { fontColor } from '../Common/Config'
 import UserService from '../Services/auth.service'
+import TokenService from '../Services/token.service'
 
 const Register = () => {
     const [data,setData] = useState({
@@ -15,7 +16,13 @@ const Register = () => {
 
     const history = useHistory()
     const submitRef = useRef()
-    // const user = useContext(UserContext)
+    
+    useEffect(()=>{
+        const userData = TokenService.getUser()
+        if(!!userData) {
+            history.push('/dashboard')
+        }
+    },[])
 
     const onRegister = async () => {
         try{

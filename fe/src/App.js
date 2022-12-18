@@ -1,7 +1,6 @@
 import { BrowserRouter ,Switch} from "react-router-dom";
 import { Route } from "react-router";
 import Dashboard from "./Components/Dashboard";
-import Loading from "./Components/Loading";
 import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Home from "./Home";
@@ -14,8 +13,7 @@ function App() {
       <div className="max-w-lg mx-auto h-screen bg-white">
           <BrowserRouter>
             <Switch>
-              <Route exact path='/' component={Loading} />
-              <Route path='/home' component={Home} />
+              <Route exact path='/' component={Home} />
               <Route path='/login' component={Login} />
               <Route path='/register' component={Register} />
               <Route path='/dashboard' component={Dashboard} />

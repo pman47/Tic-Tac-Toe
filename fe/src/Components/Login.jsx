@@ -1,9 +1,10 @@
-import React, { useRef, useState } from 'react'
+import React, { useEffect, useRef, useState } from 'react'
 import { useHistory } from 'react-router-dom'
 import BackButton from '../Common/BackButton'
 import Button from '../Common/Button'
 import { fontColor } from '../Common/Config'
 import UserService from '../Services/auth.service'
+import TokenService from '../Services/token.service'
 
 const Login = () => {
     const [data,setData] = useState({
@@ -15,6 +16,14 @@ const Login = () => {
 
     const history = useHistory()
     const submitRef = useRef()
+
+    useEffect(()=>{
+        const userData = TokenService.getUser()
+        console.log(!!userData)
+        if(!!userData) {
+            history.push('/dashboard')
+        }
+    },[])
 
     const onLogin = async () => {
         try{

@@ -24,17 +24,25 @@ const Games = ({ games, user }) => {
             } else {
                 if ( isUserCreator ) {
                     if ( game.turn === 1 ) {
-                        description = `${game.player.firstName} just made their move!. \n Its your turn to play now.`
-                        btnText = "Play!"
+                        if (game.createdAt === game.updatedAt) {
+                            description = "Game isn't started yet, pls make a first move."
+                        } else {
+                            description = `${game.player.firstName} just made their move!. Its your turn to play now.`
+                            btnText = "Play!"
+                        }
                     } else {
-                        description = `You have made your move! \n Waiting for ${game.player.firstName} to play.`
+                        description = `You have made your move!Waiting for ${game.player.firstName} to play.`
                     }
                 } else {
                     if ( game.turn === 2 ) {
-                        description = `${game.creator.firstName} just made their move!. \n Its your turn to play now.`
+                        description = `${game.creator.firstName} just made their move!. Its your turn to play now.`
                         btnText = "Play!"
                     } else {
-                        description = `You have made your move! \n Waiting for ${game.creator.firstName} to play.`
+                        if ( game.createdAt === game.updatedAt) {
+                            description = "Game isn't started yet, pls wait till creator make the first move."
+                        } else {
+                            description = `You have made your move! Waiting for ${game.creator.firstName} to play.`
+                        }
                     }
                 }
             }
