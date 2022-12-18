@@ -57,6 +57,39 @@ const PlayGame = () => {
         }
     }
 
+    let description;
+    let btnText;
+    if(game?.isCompleted){
+        if (game.result === "Won") {
+            if(game.whoWon === user._id) {
+                description = "You Won"
+            } else {
+                description = "You Lose"
+            }
+        } else {
+            description = "Its a Draw!"
+        }
+        btnText="Start another game"
+    } else {
+        if ( game?.creator?._id === user?._id ) {
+            if ( game?.turn === 1 ) {
+                description = "Your move"
+                btnText = "Submit!"
+            } else {
+                description = `Their move`
+                btnText = `Waiting for ${game?.player?.firstName}`
+            }
+        } else {
+            if ( game?.turn === 2 ) {
+                description = `Your move`
+                btnText = "Submit!"
+            } else {
+                description = "Their move"
+                btnText = `Waiting for ${game?.creator?.firstName}`
+            }
+        }
+    }
+
     return (
         <div className='p-5 relative h-full'>
             <BackButton onBackPress={onBackPress} />
@@ -66,9 +99,9 @@ const PlayGame = () => {
             <div className='flex h-20 w-20 align-middle justify-center'>
                 <FontAwesomeIcon className='mt-2 text-6xl' icon={faXmark} style={{ color: fontColor.cross_blue }} />
             </div>
-            <p className='p-5 w-full bg-[#FFE79E] text-center text-xl'>Your move</p>
+            <p className='p-5 w-full bg-[#FFE79E] text-center text-xl'>{description}</p>
             {/* <FontAwesomeIcon icon={faCircleDot} style={{color: "#FF4F4F"}} /> */}
-            <Board board={game?.board} myTurn={myTurnNo} gameTurn={game?.turn} game={game} processMove={processMove} />
+            <Board board={game?.board} myTurn={myTurnNo} gameTurn={game?.turn} game={game} processMove={processMove} btnText={btnText} />
         </div>
     )
 }

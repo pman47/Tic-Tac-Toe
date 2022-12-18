@@ -3,10 +3,12 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import React, { useEffect, useState } from 'react'
 import { fontColor } from './Config'
 import Button from './Button'
+import { useHistory } from 'react-router-dom'
 
-const Board = ({ board, myTurn, gameTurn, game, processMove }) => {
+const Board = ({ board, myTurn, gameTurn, game, processMove, btnText }) => {
     const [actualBoard, setActualBoard] = useState([])
     const [clickedBox,setClickedBox] = useState()
+    const history = useHistory()
 
     useEffect(()=>{
         let tempBoard = board?.map((value,index) => ({index, value}))
@@ -53,8 +55,10 @@ const Board = ({ board, myTurn, gameTurn, game, processMove }) => {
             </div>
             {
                 <div className='absolute bottom-5 w-[95%] flex ml-[2.5%] left-0'>
-                    <Button text={'Submit!'} color={fontColor.yellow} onPress={()=>{
-                        if (clickedBox!==undefined) {
+                    <Button text={btnText} color={fontColor.yellow} onPress={()=>{
+                        if(game.isCompleted){
+                            history.push('/newGame')
+                        } else if (clickedBox!==undefined) {
                             processMove(clickedBox)
                             setClickedBox(undefined)
                         }

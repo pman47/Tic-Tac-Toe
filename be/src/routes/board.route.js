@@ -35,7 +35,7 @@ router.post('/updateMove', async(req,res)=>{
         }
         board.turn = ( board.turn === 1 ) ? 2 : 1
 
-        const updatedBoard = await Board.findOneAndUpdate({ _id: board._id }, board ,{ new: true });
+        const updatedBoard = await Board.findOneAndUpdate({ _id: board._id }, board ,{ new: true }).populate('creator').populate('player');
         
         res.status(200).json(updatedBoard)
     } catch(error) {
