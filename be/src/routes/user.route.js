@@ -4,6 +4,7 @@ const { User } = require('../models')
 
 router.post('/login', async (req,res)=>{
     const body = req.body
+    console.log(body)
     try{
         const userData = await User.findOne({ username : body.username, password: body.password })
         if(!userData){
