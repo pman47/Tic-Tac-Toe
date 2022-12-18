@@ -2,15 +2,15 @@ const express = require('express')
 const router = express.Router()
 const { User } = require('../models')
 
-router.get('/login', async (req,res)=>{
+router.post('/login', async (req,res)=>{
     const body = req.body
     try{
-        const userData = await User.findOne({ email : body.email, password: body.password })
+        const userData = await User.findOne({ username : body.username, password: body.password })
         if(!userData){
-            res.status(400).json({message: 'Enter correct details.'})
+            res.status(400).json({ message: 'Enter correct details.' })
             return
         }
-        res.status(200).json(body)
+        res.status(200).json(userData)
     }catch(error){
         console.log(error)
         res.status(400).json(error)
@@ -34,9 +34,6 @@ router.get('/get-users', async (req,res)=>{
 
 
 router.post('/register', async (req,res)=>{
-    console.log(req)
-    console.log(req?.url)
-    console.log(req.body)
     const body = req.body
     try{
         const existingUser = await User.findOne({$or : [ { email: body.email }, { username: body.username }]} )
@@ -45,8 +42,8 @@ router.post('/register', async (req,res)=>{
             res.status(400).json({ message })
             return 
         }
-        await User.create(body)
-        res.status(200).json({message: 'User Created Successfully'})
+        const createdUser = await User.create(body)
+        res.status(200).json({message: 'User Created Successfully', data: createdUser})
     }catch(error){
         console.log(error)
         res.status(400).json({message: 'Something went wrong.'})

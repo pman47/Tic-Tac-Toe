@@ -17,8 +17,8 @@ const UserService = {
 
   register(data) {
     return api.post("/user/register", data).then((response) => {
-      if (response.data) {
-        TokenService.setUser(response.data);
+      if (response.data.data) {
+        TokenService.setUser(response.data.data);
       }
       return response.data;
     });
