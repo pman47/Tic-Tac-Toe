@@ -36,7 +36,7 @@ const Register = () => {
     }
 
     const onBackPress = () => {
-        history.push('/home')
+        history.push('/')
     }
 
     return (

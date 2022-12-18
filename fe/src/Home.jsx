@@ -15,6 +15,7 @@ const Home = () => {
             if(!!userData) {
                 history.push('/dashboard')
             }
+            setLoading(false)
         },1000)
         return ()=>{
             setLoading(false)

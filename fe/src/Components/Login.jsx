@@ -38,7 +38,7 @@ const Login = () => {
     }
 
     const onBackPress = () => {
-        history.push('/home')
+        history.push('/')
     }
 
     return (

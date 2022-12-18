@@ -1,6 +1,5 @@
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
 import { faChevronLeft } from '@fortawesome/free-solid-svg-icons'
-import { useHistory } from 'react-router-dom'
 
 const BackButton = ({onBackPress}) => {
   return (

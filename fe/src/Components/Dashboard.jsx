@@ -5,6 +5,8 @@ import { fontColor } from '../Common/Config'
 import Games from '../Common/Games'
 import gameService from '../Services/game.service'
 import TokenService from '../Services/token.service'
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome'
+import { faArrowRightFromBracket } from '@fortawesome/free-solid-svg-icons'
 
 const Dashboard = () => {
   const history = useHistory()
@@ -37,7 +39,15 @@ const Dashboard = () => {
 
   return (
     <div className='relative p-5 h-full overflow-hidden overflow-y-scroll scrollbar-hide'>
-      <p className='font-bold text-3xl my-2'>Your Games</p>
+      <div className='flex flex-row justify-between align-middle my-2'>
+        <p className='font-bold text-3xl'>Your Games</p>
+        <button className='font-bold text-lg' onClick={()=>{
+          TokenService.removeUser()
+          history.push('/')
+        }}>
+          <FontAwesomeIcon icon={faArrowRightFromBracket} /> Logout
+        </button>
+      </div>
       {
         isLoading ?
           <Loading />

@@ -14,6 +14,18 @@ const gameService = {
       return response.data;
     });
   },
+
+  async getGameById(id) {
+    return api.get(`board/getBoardById?gameId=${id}`).then((response)=>{
+      return response.data;
+    })
+  },
+
+  async updateMove(data){
+    return api.post(`board/updateMove`, data).then((response)=>{
+      return response.data;
+    })
+  }
 };
 
 export default gameService;

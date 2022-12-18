@@ -5,6 +5,7 @@ import Login from "./Components/Login";
 import Register from "./Components/Register";
 import Home from "./Home";
 import NewGame from "./Components/NewGame";
+import PlayGame from "./Components/PlayGame";
 
 function App() {
 
@@ -18,6 +19,7 @@ function App() {
               <Route path='/register' component={Register} />
               <Route path='/dashboard' component={Dashboard} />
               <Route path='/newGame' component={NewGame} />
+              <Route path='/playGame/:gameId' component={PlayGame} />
             </Switch>
           </BrowserRouter>
       </div>

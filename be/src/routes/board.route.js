@@ -6,6 +6,7 @@ const router = express.Router()
 
 router.post('/updateMove', async(req,res)=>{
     const body = req.body
+    console.log('BODYY', body)
     try {
 
         let board = await Board.findById(body.boardId)
@@ -56,6 +57,21 @@ router.get('/boards', async(req,res)=>{
                 { player : Object(userId) }
             ]
         }).sort({ updatedAt : 1 }).populate('creator').populate('player')
+        res.status(200).json(allBoards)
+    } catch(error) {
+        console.log(error)
+        res.status(400).json({ message: "Something went wrong" })
+    }
+})
+
+router.get('/getBoardById', async(req,res)=>{
+    const gameId = req.query?.gameId
+    if(gameId === undefined){
+        res.status(400).json({ message: "Undefined Id passed" })
+        return
+    }
+    try {
+        const allBoards = await Board.findById(gameId).populate('creator').populate('player')
         res.status(200).json(allBoards)
     } catch(error) {
         console.log(error)
