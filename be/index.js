@@ -13,7 +13,7 @@ app.use(
 )
 
 // Routes
-const routes = require('./routes')
+const routes = require('./src/routes')
 
 
 app.set('trust proxy', true)
@@ -23,7 +23,7 @@ app.use(express.json())
 app.use('',routes)
 
 app.get('/', (req, res) => {
-  res.sendFile('index.html', {root: path.join(__dirname, '../public')});
+  res.sendFile('index.html', {root: path.join(__dirname, './public')});
 })
 
 
