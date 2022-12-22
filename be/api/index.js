@@ -23,7 +23,7 @@ app.use(express.json())
 //   res.sendFile('index.html', {root: path.join(__dirname, './public')});
 // })
 
-app.use('',routes)
+app.use('/api',routes)
 
 
 
