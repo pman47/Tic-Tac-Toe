@@ -12,7 +12,7 @@ app.use(
 )
 
 // Routes
-const routes = require('./src/routes')
+const routes = require('../src/routes')
 
 
 app.set('trust proxy', true)
