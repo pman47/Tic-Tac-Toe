@@ -38,6 +38,6 @@
    - Login to app.
    - See all previous, ongoing and next games.
    - can start new game with any registered user which is not having any game ongoing with this user.
-     - After the completion of current ongoing game only user can play game with the same person again.
+     - After the completion of current ongoing game only user can create the new game with the same person again.
    - Can refresh board or games of dashboard from screen itself.
    - Can logout.
