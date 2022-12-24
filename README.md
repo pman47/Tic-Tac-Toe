@@ -21,7 +21,7 @@
  - Mongoose
  etc.
 
-### Live Link ( Deployment Pending )
+### [Live Link](https://async-tic-tac-toe-six.vercel.app/)
 
 ---
 
